@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 export default class Home extends Component {
   constructor() {
@@ -13,6 +14,7 @@ export default class Home extends Component {
 
     return (
       <div>
+        <Link to="/cart" data-testid="shopping-cart-button">Carrinho</Link>
         <label htmlFor="search">
           <input type="text" id="search" placeholder="Digite um produto" />
         </label>

@@ -63,7 +63,7 @@ export default class Home extends Component {
         >
           Pesquisar
         </button>
-        { message ? <span>{ message }</span> : (
+        { message ? <span data-testid="home-initial-message">{ message }</span> : (
           <Content searchResult={ searchResult } />
         )}
       </div>

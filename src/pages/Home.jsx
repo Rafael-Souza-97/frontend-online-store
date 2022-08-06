@@ -1,16 +1,24 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import NavCategories from '../components/NavCategories';
+import { getCategories } from '../services/api';
 
 export default class Home extends Component {
   constructor() {
     super();
     this.state = {
-      result: [],
+      searchResult: [],
+      categories: [],
     };
   }
 
+  componentDidMount = async () => {
+    const categories = await getCategories();
+    this.setState({ categories });
+  }
+
   render() {
-    const { result } = this.state;
+    const { searchResult, categories } = this.state;
 
     return (
       <div>
@@ -19,7 +27,7 @@ export default class Home extends Component {
           <input type="text" id="search" placeholder="Digite um produto" />
         </label>
         {
-          !result.length && (
+          !searchResult.length && (
             <span
               data-testid="home-initial-message"
             >
@@ -27,6 +35,12 @@ export default class Home extends Component {
             </span>
           )
         }
+        { categories.map(({ name, id }) => (
+          <NavCategories
+            key={ id }
+            name={ name }
+          />
+        ))}
 
       </div>
     );

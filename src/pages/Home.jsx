@@ -2,7 +2,11 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Content from '../components/Content';
 import NavCategories from '../components/NavCategories';
-import { getCategories, getProductsFromQuery } from '../services/api';
+import {
+  getCategories,
+  getProductsFromQuery,
+  getProductsFromCategory,
+} from '../services/api';
 
 export default class Home extends Component {
   constructor() {
@@ -14,6 +18,7 @@ export default class Home extends Component {
       categories: [],
       inputSearch: '',
       message: 'Digite algum termo de pesquisa ou escolha uma categoria.',
+      currentCategory: '',
     };
   }
 
@@ -31,6 +36,17 @@ export default class Home extends Component {
     this.setState({
       searchResult: await getProductsFromQuery(inputSearch),
       message: '',
+
+    });
+  }
+
+  saveFilterCategory = ({ target }) => {
+    this.setState({ currentCategory: target.id }, async () => {
+      const { currentCategory } = this.state;
+      this.setState({
+        searchResult: await getProductsFromCategory(currentCategory),
+        message: '',
+      });
     });
   }
 
@@ -43,6 +59,8 @@ export default class Home extends Component {
           <NavCategories
             key={ id }
             name={ name }
+            id={ id }
+            saveFilterCategory={ this.saveFilterCategory }
           />
         ))}
         <Link to="/cart" data-testid="shopping-cart-button">Carrinho</Link>

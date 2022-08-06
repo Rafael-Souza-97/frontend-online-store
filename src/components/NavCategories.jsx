@@ -3,10 +3,15 @@ import PropTypes from 'prop-types';
 
 export default class NavCategories extends Component {
   render() {
-    const { name } = this.props;
+    const { name, saveFilterCategory, id } = this.props;
     return (
       <div>
-        <button type="button" data-testid="category">
+        <button
+          type="button"
+          id={ id }
+          data-testid="category"
+          onClick={ saveFilterCategory }
+        >
           { name }
         </button>
       </div>
@@ -16,4 +21,6 @@ export default class NavCategories extends Component {
 
 NavCategories.propTypes = {
   name: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  saveFilterCategory: PropTypes.func.isRequired,
 };

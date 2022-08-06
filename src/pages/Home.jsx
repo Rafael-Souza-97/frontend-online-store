@@ -12,9 +12,7 @@ export default class Home extends Component {
   constructor() {
     super();
     this.state = {
-      searchResult: {
-        results: [],
-      },
+      searchResult: {},
       categories: [],
       inputSearch: '',
       message: 'Digite algum termo de pesquisa ou escolha uma categoria.',
@@ -52,7 +50,6 @@ export default class Home extends Component {
 
   render() {
     const { searchResult, categories, message } = this.state;
-    // const { results } = searchResult;
     return (
       <div>
         { categories.map(({ name, id }) => (

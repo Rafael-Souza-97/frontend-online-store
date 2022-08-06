@@ -5,7 +5,6 @@ import ItemCard from './ItemCard';
 export default class Content extends Component {
   render() {
     const { searchResult: { results } } = this.props;
-    console.log(results);
     return (
       <div>
         { results.length ? (

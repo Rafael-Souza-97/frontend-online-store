@@ -14,7 +14,9 @@ export default class Content extends Component {
               thumbnail={ thumbnail }
               title={ title }
               price={ price }
+              id={ id }
             />
+
           ))
         ) : <h3>Nenhum produto foi encontrado</h3>}
       </div>

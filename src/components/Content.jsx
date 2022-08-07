@@ -1,20 +1,41 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ItemCard from './ItemCard';
+import { setProductToLocalStorage } from '../services/localStorage';
 
 export default class Content extends Component {
+  constructor() {
+    super();
+    this.state = {
+      products: [],
+    };
+  }
+
+  handleChange = (result) => {
+    this.setState((prevState) => ({
+      products: [...prevState.products, result],
+    }));
+  }
+
+  componentDidUpdate = () => {
+    const { products } = this.state;
+    setProductToLocalStorage(JSON.stringify(products));
+  }
+
   render() {
     const { searchResult: { results } } = this.props;
     return (
       <div>
         { results.length ? (
-          results.map(({ id, thumbnail, title, price }) => (
+          results.map((result) => (
             <ItemCard
-              key={ id }
-              thumbnail={ thumbnail }
-              title={ title }
-              price={ price }
-              id={ id }
+              key={ result.id }
+              thumbnail={ result.thumbnail }
+              title={ result.title }
+              price={ result.price }
+              id={ result.id }
+              result={ result }
+              change={ this.handleChange }
             />
 
           ))

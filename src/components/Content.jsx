@@ -11,7 +11,7 @@ export default class Content extends Component {
     };
   }
 
-  handleChange = (result) => {
+  handleClick = (result) => {
     this.setState((prevState) => ({
       products: [...prevState.products, result],
     }));
@@ -35,7 +35,7 @@ export default class Content extends Component {
               price={ result.price }
               id={ result.id }
               result={ result }
-              change={ this.handleChange }
+              onClick={ this.handleClick }
             />
 
           ))

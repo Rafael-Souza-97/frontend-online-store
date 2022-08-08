@@ -30,7 +30,7 @@ export default class Cart extends Component {
     return (
       <div>
         {
-          cartProducts === null ? (
+          !cartProducts.length ? (
             <span
               data-testid="shopping-cart-empty-message"
             >

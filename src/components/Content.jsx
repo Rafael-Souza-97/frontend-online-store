@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ItemCard from './ItemCard';
-import { setProductToLocalStorage } from '../services/localStorage';
+import {
+  getProductToLocalStorage,
+  setProductToLocalStorage,
+} from '../services/localStorage';
 
 export default class Content extends Component {
   constructor() {
@@ -9,6 +12,12 @@ export default class Content extends Component {
     this.state = {
       products: [],
     };
+  }
+
+  componentDidMount = () => {
+    this.setState({
+      products: JSON.parse(getProductToLocalStorage()),
+    });
   }
 
   handleClick = (result) => {

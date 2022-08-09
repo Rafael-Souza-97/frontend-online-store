@@ -21,7 +21,6 @@ export default class Home extends Component {
   }
 
   componentDidMount = async () => {
-    localStorage.setItem('products', JSON.stringify([]));
     const categories = await getCategories();
     this.setState({ categories });
   }

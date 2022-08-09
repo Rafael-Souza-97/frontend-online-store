@@ -17,27 +17,29 @@ export default class Cart extends Component {
     const products = JSON.parse(getProductToLocalStorage());
     this.setState({
       cartProducts: products,
-    }, () => {
-      const { cartProducts } = this.state;
-      const reduceCartProducts = cartProducts.reduce((acc, curr) => {
-        const hasRepeat = acc.includes(curr.title);
-        if (!hasRepeat) {
-          const a = curr.title;
-          acc.push(a);
-          return acc;
-        } return acc;
-      }, []);
-      const filteredProducts = [];
-      reduceCartProducts.forEach((title) => {
-        filteredProducts.push(cartProducts.find((el) => el.title === title));
-      });
-      this.setState({ filteredProducts });
-    });
+    }, () => this.filterProducts());
   }
 
   componentDidUpdate = () => {
     const { cartProducts } = this.state;
     setProductToLocalStorage(JSON.stringify(cartProducts));
+  }
+
+  filterProducts = () => {
+    const { cartProducts } = this.state;
+    const reduceCartProducts = cartProducts.reduce((acc, curr) => {
+      const hasRepeat = acc.includes(curr.title);
+      if (!hasRepeat) {
+        const getTitle = curr.title;
+        acc.push(getTitle);
+        return acc;
+      } return acc;
+    }, []);
+    const filteredProducts = [];
+    reduceCartProducts.forEach((title) => {
+      filteredProducts.push(cartProducts.find((el) => el.title === title));
+    });
+    this.setState({ filteredProducts });
   }
 
   returnQuantEqualCartProducts = (param) => {
@@ -52,9 +54,11 @@ export default class Cart extends Component {
     const { cartProducts } = this.state;
     const { name, id } = target;
     if (name === 'remove') {
-      const item = document.querySelector('#item');
-      item.remove();
-      // solução temporária para requisito 10 (NÃO DEVERIA SER EXIGIDO, segundo README)
+      const removeAllSimilarProducts = cartProducts
+        .filter((product) => product.id !== id);
+      this.setState({ cartProducts: removeAllSimilarProducts }, () => {
+        this.filterProducts();
+      });
     }
     if (name === 'decrease') {
       cartProducts.splice(id, 1); // params: index que quer remover, e quantos quer remover
@@ -81,7 +85,7 @@ export default class Cart extends Component {
             </span>
           ) : (
             filteredProducts.map((product, index) => (
-              <div key={ index } id="item">
+              <div key={ index }>
                 <img src={ product.thumbnail } alt={ product.title } />
                 <h3 data-testid="shopping-cart-product-name">{ product.title }</h3>
                 <p>{ product.price }</p>
@@ -111,6 +115,7 @@ export default class Cart extends Component {
                 <button
                   type="button"
                   name="remove"
+                  id={ product.id }
                   data-testid="remove-product"
                   onClick={ this.handleQuantity }
                 >

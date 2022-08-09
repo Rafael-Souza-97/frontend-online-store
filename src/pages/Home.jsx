@@ -21,7 +21,10 @@ export default class Home extends Component {
   }
 
   componentDidMount = async () => {
-    localStorage.setItem('products', JSON.stringify([]));
+    if (!localStorage.length) {
+      localStorage.setItem('products', JSON.stringify([]));
+      localStorage.setItem('evaluations', JSON.stringify([]));
+    }
     const categories = await getCategories();
     this.setState({ categories });
   }

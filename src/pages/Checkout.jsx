@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { getProductToLocalStorage } from '../services/localStorage';
+import filterProducts from '../services/services';
 
 export default class Checkout extends Component {
   constructor() {
     super();
     this.state = {
-      cartProducts: [],
       filteredProducts: [],
       errorMessage: '',
       fullName: '',
@@ -22,24 +22,7 @@ export default class Checkout extends Component {
 
   componentDidMount = () => {
     const cartProducts = JSON.parse(getProductToLocalStorage());
-    this.setState({ cartProducts }, this.filterProducts);
-  }
-
-  filterProducts = () => {
-    const { cartProducts } = this.state;
-    const reduceCartProducts = cartProducts.reduce((acc, curr) => {
-      const hasRepeat = acc.includes(curr.title);
-      if (!hasRepeat) {
-        const getTitle = curr.title;
-        acc.push(getTitle);
-        return acc;
-      } return acc;
-    }, []);
-    const filteredProducts = [];
-    reduceCartProducts.forEach((title) => {
-      filteredProducts.push(cartProducts.find((el) => el.title === title));
-    });
-    this.setState({ filteredProducts });
+    this.setState({ filteredProducts: filterProducts(cartProducts) });
   }
 
   checkMessageAndButtonDisable = () => {

@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import {
   getProductToLocalStorage,
   setProductToLocalStorage,
 } from '../services/localStorage';
+import filterProducts from '../services/services';
 
 export default class Cart extends Component {
   constructor() {
@@ -14,32 +16,16 @@ export default class Cart extends Component {
   }
 
   componentDidMount = () => {
-    const products = JSON.parse(getProductToLocalStorage());
+    const cartProducts = JSON.parse(getProductToLocalStorage());
     this.setState({
-      cartProducts: products,
-    }, () => this.filterProducts());
+      cartProducts,
+      filteredProducts: filterProducts(cartProducts),
+    });
   }
 
   componentDidUpdate = () => {
     const { cartProducts } = this.state;
     setProductToLocalStorage(JSON.stringify(cartProducts));
-  }
-
-  filterProducts = () => {
-    const { cartProducts } = this.state;
-    const reduceCartProducts = cartProducts.reduce((acc, curr) => {
-      const hasRepeat = acc.includes(curr.title);
-      if (!hasRepeat) {
-        const getTitle = curr.title;
-        acc.push(getTitle);
-        return acc;
-      } return acc;
-    }, []);
-    const filteredProducts = [];
-    reduceCartProducts.forEach((title) => {
-      filteredProducts.push(cartProducts.find((el) => el.title === title));
-    });
-    this.setState({ filteredProducts });
   }
 
   returnQuantEqualCartProducts = (param) => {
@@ -56,9 +42,9 @@ export default class Cart extends Component {
     if (name === 'remove') {
       const removeAllSimilarProducts = cartProducts
         .filter((product) => product.id !== id);
-      this.setState({ cartProducts: removeAllSimilarProducts }, () => {
-        this.filterProducts();
-      });
+      this.setState({
+        cartProducts: removeAllSimilarProducts,
+        filteredProducts: filterProducts(removeAllSimilarProducts) });
     }
     if (name === 'decrease') {
       cartProducts.splice(id, 1); // params: index que quer remover, e quantos quer remover
@@ -125,6 +111,7 @@ export default class Cart extends Component {
             ))
           )
         }
+        <Link to="/checkout" data-testid="checkout-products">Fechar pedido</Link>
       </div>
     );
   }

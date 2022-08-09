@@ -26,8 +26,12 @@ export default class Products extends Component {
     const { match: { params: { id } } } = this.props;
     const requestProduct = await getProductFromId(id);
     const productsInCart = JSON.parse(getProductToLocalStorage());
-    const evaluationArr = JSON.parse(getEvaluationToLocalStorage());
-    this.setState({ requestProduct, productsInCart, evaluationArr });
+    const evaluationArr = await JSON.parse(getEvaluationToLocalStorage(id));
+    this.setState({
+      requestProduct,
+      productsInCart,
+      evaluationArr,
+    });
   }
 
   handleClick = () => {
@@ -54,7 +58,8 @@ export default class Products extends Component {
       const emailRegex = /\S+@\S+\.\S+/;
       this.setState({
         hasValidEmail: emailRegex.test(value),
-        email: value }, this.checkButton);
+        email: value,
+        productId: id }, this.checkButton);
     }
     if (type === 'radio') {
       this.setState({ evaluation: id }, this.checkButton);
@@ -65,11 +70,18 @@ export default class Products extends Component {
   }
 
   submitEvaluation = () => {
-    const { email, evaluation, comments, evaluationArr } = this.state;
-    const evaluationObj = { email, evaluation, comments };
+    const {
+      email,
+      evaluation,
+      comments, evaluationArr, productId } = this.state;
+    const { match: { params: { id } } } = this.props;
+    const evaluationObj = { email, evaluation, comments, productId };
     evaluationArr.push(evaluationObj);
-    setEvaluationToLocalStorage(JSON.stringify(evaluationArr));
-    this.setState({ evaluationArr, email: '', evaluation: '', comments: '' });
+    setEvaluationToLocalStorage(id, JSON.stringify(evaluationArr));
+    this.setState({
+      email: '',
+      evaluation: '',
+      comments: '' });
   }
 
   render() {
@@ -77,10 +89,10 @@ export default class Products extends Component {
       isDisabled,
       evaluationArr,
       email,
-      // evaluation,
       comments,
       errorMessage,
     } = this.state;
+    const { match: { params: { id } } } = this.props;
 
     return (
       <div>
@@ -110,6 +122,7 @@ export default class Products extends Component {
           className="evaluation-input"
           required
           data-testid="product-detail-email"
+          id={ id }
           value={ email }
           onChange={ this.handleChange }
         />
@@ -120,7 +133,6 @@ export default class Products extends Component {
             name="evaluation"
             id="1"
             data-testid="1-rating"
-            // checked={ check1 }
             onChange={ this.handleChange }
           />
           1
@@ -183,14 +195,15 @@ export default class Products extends Component {
           <p data-testid="error-msg">{errorMessage}</p>
         )}
 
-        {evaluationArr !== null && (
+        {
           evaluationArr.map((el, i) => (
             <div key={ i }>
               <p data-testid="review-card-email">{el.email}</p>
               <p data-testid="review-card-rating">{`Nota: ${el.evaluation}`}</p>
-              {el.comments && <p data-testid="review-card-evaluation">{el.comments}</p>}
+              <p data-testid="review-card-evaluation">{el.comments}</p>
             </div>
-          )))}
+          ))
+        }
       </div>
     );
   }

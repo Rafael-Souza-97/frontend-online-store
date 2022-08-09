@@ -6,6 +6,7 @@ import {
   getEvaluationToLocalStorage,
   getProductToLocalStorage, setEvaluationToLocalStorage, setProductToLocalStorage,
 } from '../services/localStorage';
+import CartInfo from '../components/CartInfo';
 
 export default class Products extends Component {
   constructor() {
@@ -19,6 +20,7 @@ export default class Products extends Component {
       evaluation: '',
       comments: '',
       errorMessage: '',
+      counter: JSON.parse(getProductToLocalStorage()).length,
     };
   }
 
@@ -32,6 +34,10 @@ export default class Products extends Component {
       productsInCart,
       evaluationArr,
     });
+  }
+
+  updateCounter = (param) => {
+    this.setState({ counter: param });
   }
 
   handleClick = () => {
@@ -91,6 +97,7 @@ export default class Products extends Component {
       email,
       comments,
       errorMessage,
+      counter,
     } = this.state;
     const { match: { params: { id } } } = this.props;
 
@@ -106,13 +113,19 @@ export default class Products extends Component {
 
         <p data-testid="product-detail-price">{`R$: ${price}`}</p>
 
-        <Link to="/cart" data-testid="shopping-cart-button">
-          Carrinho
-        </Link>
+        <div>
+          <CartInfo counter={ counter } />
+          <Link to="/cart" data-testid="shopping-cart-button">
+            Carrinho
+          </Link>
+        </div>
 
         <button
           type="button"
-          onClick={ this.handleClick }
+          onClick={ () => {
+            this.handleClick();
+            this.updateCounter(JSON.parse(getProductToLocalStorage()).length);
+          } }
           data-testid="product-detail-add-to-cart"
         >
           Adicionar ao Carrinho

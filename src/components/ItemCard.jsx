@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+// import { getProductToLocalStorage } from '../services/localStorage';
 
 export default class ItemCard extends Component {
   render() {
-    const { thumbnail, title, price, id, onClick, result } = this.props;
+    const { thumbnail, title, price, id, onClick, result, updateCounter } = this.props;
     return (
       <div data-testid="product">
         <img src={ thumbnail } alt={ title } />
@@ -19,7 +20,10 @@ export default class ItemCard extends Component {
 
         <button
           type="button"
-          onClick={ () => onClick(result) }
+          onClick={ () => {
+            onClick(result);
+            updateCounter();
+          } }
           data-testid="product-add-to-cart"
         >
           Adicionar ao Carrinho
@@ -36,4 +40,5 @@ ItemCard.propTypes = {
   id: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
   result: PropTypes.shape().isRequired,
+  updateCounter: PropTypes.func.isRequired,
 };

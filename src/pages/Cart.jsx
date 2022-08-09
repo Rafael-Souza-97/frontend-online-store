@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import {
   getProductToLocalStorage,
   setProductToLocalStorage,
@@ -125,6 +126,7 @@ export default class Cart extends Component {
             ))
           )
         }
+        <Link to="/checkout" data-testid="checkout-products">Fechar pedido</Link>
       </div>
     );
   }

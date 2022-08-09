@@ -126,7 +126,7 @@ export default class Products extends Component {
           value={ email }
           onChange={ this.handleChange }
         />
-        <label htmlFor="evaluation" required>
+        <label required htmlFor="evaluation">
           <input
             type="radio"
             className="evaluation-input"

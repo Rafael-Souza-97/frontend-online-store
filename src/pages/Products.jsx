@@ -36,8 +36,8 @@ export default class Products extends Component {
     });
   }
 
-  updateCounter = (param) => {
-    this.setState({ counter: param });
+  updateCounter = () => {
+    this.setState(({ counter }) => ({ counter: counter + 1 }));
   }
 
   handleClick = () => {
@@ -124,7 +124,7 @@ export default class Products extends Component {
           type="button"
           onClick={ () => {
             this.handleClick();
-            this.updateCounter(JSON.parse(getProductToLocalStorage()).length);
+            this.updateCounter();
           } }
           data-testid="product-detail-add-to-cart"
         >

@@ -59,6 +59,7 @@ export default class Cart extends Component {
 
   render() {
     const { filteredProducts } = this.state;
+    const minQuantity = 1;
 
     return (
       <div>
@@ -75,12 +76,17 @@ export default class Cart extends Component {
                 <img src={ product.thumbnail } alt={ product.title } />
                 <h3 data-testid="shopping-cart-product-name">{ product.title }</h3>
                 <p>{ product.price }</p>
+                <p>{ `Quantidade disponivel: ${product.available_quantity}` }</p>
                 <button
                   type="button"
                   name="decrease"
                   id={ index }
                   data-testid="product-decrease-quantity"
                   onClick={ this.handleQuantity }
+                  disabled={
+                    this.returnQuantEqualCartProducts(product.id)
+                    === minQuantity
+                  }
                 >
                   -
                 </button>
@@ -95,6 +101,10 @@ export default class Cart extends Component {
                   id={ product.id }
                   data-testid="product-increase-quantity"
                   onClick={ this.handleQuantity }
+                  disabled={
+                    this.returnQuantEqualCartProducts(product.id)
+                    === product.available_quantity
+                  }
                 >
                   +
                 </button>

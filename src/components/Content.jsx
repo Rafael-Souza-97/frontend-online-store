@@ -44,6 +44,7 @@ export default class Content extends Component {
               price={ result.price }
               id={ result.id }
               result={ result }
+              shipping={ result.shipping }
               onClick={ this.handleClick }
               updateCounter={ updateCounter }
             />

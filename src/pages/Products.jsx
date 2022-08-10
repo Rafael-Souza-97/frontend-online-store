@@ -91,7 +91,7 @@ export default class Products extends Component {
   }
 
   render() {
-    const { requestProduct: { price, title, thumbnail },
+    const { requestProduct: { price, title, thumbnail, shipping },
       isDisabled,
       evaluationArr,
       email,
@@ -100,9 +100,12 @@ export default class Products extends Component {
       counter,
     } = this.state;
     const { match: { params: { id } } } = this.props;
+    let isShipping = false;
+    if (shipping) isShipping = shipping.free_shipping;
 
     return (
       <div>
+        { isShipping && <p data-testid="free-shipping">Frete Grátis</p>}
         <img
           src={ thumbnail }
           alt={ title }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import CartInfo from '../components/CartInfo';
 import Content from '../components/Content';
 import NavCategories from '../components/NavCategories';
 import {
@@ -7,6 +8,7 @@ import {
   getProductsFromQuery,
   getProductsFromCategory,
 } from '../services/api';
+import { getProductToLocalStorage } from '../services/localStorage';
 
 export default class Home extends Component {
   constructor() {
@@ -17,12 +19,17 @@ export default class Home extends Component {
       inputSearch: '',
       message: 'Digite algum termo de pesquisa ou escolha uma categoria.',
       currentCategory: '',
+      counter: JSON.parse(getProductToLocalStorage()).length,
     };
   }
 
   componentDidMount = async () => {
     const categories = await getCategories();
     this.setState({ categories });
+  }
+
+  updateCounter = () => {
+    this.setState(({ counter }) => ({ counter: counter + 1 }));
   }
 
   handleChange = ({ target: { value, name } }) => {
@@ -49,7 +56,7 @@ export default class Home extends Component {
   }
 
   render() {
-    const { searchResult, categories, message } = this.state;
+    const { searchResult, categories, message, counter } = this.state;
     return (
       <div>
         { categories.map(({ name, id }) => (
@@ -60,7 +67,10 @@ export default class Home extends Component {
             saveFilterCategory={ this.saveFilterCategory }
           />
         ))}
-        <Link to="/cart" data-testid="shopping-cart-button">Carrinho</Link>
+        <div>
+          <CartInfo counter={ counter } />
+          <Link to="/cart" data-testid="shopping-cart-button">Carrinho</Link>
+        </div>
         <label htmlFor="search">
           <input
             type="text"
@@ -79,7 +89,7 @@ export default class Home extends Component {
           Pesquisar
         </button>
         { message ? <span data-testid="home-initial-message">{ message }</span> : (
-          <Content searchResult={ searchResult } />
+          <Content searchResult={ searchResult } updateCounter={ this.updateCounter } />
         )}
       </div>
     );

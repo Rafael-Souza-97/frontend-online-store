@@ -32,7 +32,7 @@ export default class Content extends Component {
   }
 
   render() {
-    const { searchResult: { results } } = this.props;
+    const { searchResult: { results }, updateCounter } = this.props;
     return (
       <div>
         { results.length ? (
@@ -45,6 +45,7 @@ export default class Content extends Component {
               id={ result.id }
               result={ result }
               onClick={ this.handleClick }
+              updateCounter={ updateCounter }
             />
 
           ))
@@ -58,4 +59,5 @@ Content.propTypes = {
   searchResult: PropTypes.shape({
     results: PropTypes.arrayOf(PropTypes.object.isRequired),
   }).isRequired,
+  updateCounter: PropTypes.func.isRequired,
 };

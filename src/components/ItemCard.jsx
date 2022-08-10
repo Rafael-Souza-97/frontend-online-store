@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-// import { getProductToLocalStorage } from '../services/localStorage';
 
 export default class ItemCard extends Component {
   render() {

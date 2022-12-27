@@ -71,7 +71,7 @@ Abra [http://localhost:3000](http://localhost:3000) no seu navegador para visual
 ## Referências
 
  - [Trybe](https://www.betrybe.com/)
- - [Apple iTunes API](https://developer.apple.com/library/archive/documentation/AudioVideo/Conceptual/iTuneSearchAPI/index.html)
+ - [API Mercado Livre](https://developers.mercadolivre.com.br/pt_br/itens-e-buscas)
 
 ## Tecnologias / Ferramentas utilizadas
 
@@ -80,26 +80,14 @@ Abra [http://localhost:3000](http://localhost:3000) no seu navegador para visual
 - [CSS 3](https://www.w3.org/Style/CSS/Overview.en.html)
 - [JSX](https://pt-br.reactjs.org/docs/introducing-jsx.html)
 - [Nodejs](https://nodejs.org/en/)
+- [Scrum](https://www.atlassian.com/br/agile/scrum)
+- [Kanban](https://www.totvs.com/blog/negocios/kanban/)
 - [Zoom](https://zoom.us/)
 - [Slack](https://slack.com/intl/pt-br/)
 - [VsCode](https://code.visualstudio.com/)
 - [Git](https://git-scm.com/) & [GitHub](https://github.com/)
 - [Linux - Ubuntu](https://ubuntu.com/)
 
-## Testes
-
-- [React Testing Library - RTL](https://testing-library.com/docs/react-testing-library/intro/)
-- [Jest](https://jestjs.io/pt-BR/)
-
 ## Infos Adicionais
 
 - ###### Percentual de cumprimento de requisitos ([Trybe](https://www.betrybe.com/))- 100%
-<!--- - ###### Percentual de cumprimento de requisitos totais da ([Trybe](https://www.betrybe.com/))- 79% --->
-
-## Deploy
-
-https://music-tunes-beige.vercel.app/album/1623258524
-
-## Preview
-
-https://user-images.githubusercontent.com/99055008/206927686-451eb26d-509d-4337-9a7d-c7120bb3b0d2.mp4

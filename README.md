@@ -1,13 +1,13 @@
 # Front-End Online Store
 
-Aplicação realizada enquanto aluno da [Trybe](https://www.betrybe.com/) para reforçar os conhecimentos sobre [React](https://pt-br.reactjs.org/) com classes e trabalho em equipe utilizando Metodologias Ágeis.
+Aplicação realizada enquanto aluno da [Trybe](https://www.betrybe.com/) para reforçar os conhecimentos sobre [React](https://pt-br.reactjs.org/) com classes e trabalho em equipe utilizando [Metodologias Ágeis](https://blog.betrybe.com/carreira/metodologias-ageis/#:~:text=As%20metodologias%20%C3%A1geis%20s%C3%A3o%20aquelas,risco%20a%20qualidade%20do%20trabalho).
 A aplicação é uma loja online, sem persistência no banco de dados, desenvolvida em grupo de acordo com demandas definidas em um quadro [Kanban](https://www.totvs.com/blog/negocios/kanban/), em um cenário próximo ao do mercado de trabalho.
 
 Neste projeto, a partir dessas demandas, o usuário pode:
 
-- Buscar produtos por termos e categorias a partir da API do Mercado Livre;
+- Buscar produtos por termos e categorias a partir da [API do Mercado Livre](https://developers.mercadolivre.com.br/pt_br/itens-e-buscas);
 - Interagir com os produtos buscados de modo a adicioná-los e removê-los de um carrinho de compras em diferentes quantidades;
-- Visualizar detalhes e avaliações prévias de um produto, bem como criar novas avaliações e;
+- Visualizar detalhes e avaliações prévias de um produto, bem como criar novas avaliações;
 - Simular a finalização da compra dos itens selecionados. 
 
 <br>

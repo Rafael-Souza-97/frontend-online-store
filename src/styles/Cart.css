@@ -1,0 +1,77 @@
+.message-cart {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #f1f1f1;
+  text-align: center;
+  justify-content: center;
+  font-size: 22px;
+  color: #333;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  line-height: 1.5;
+}
+
+.cart-card {
+  margin: 20px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
+  overflow: hidden;
+}
+
+.cart-title {
+  width: 700px;
+}
+.increase-decrease {
+  display: flex;
+  align-items: center;
+  width: 100px;
+  justify-content: space-between;
+  margin: 15px;
+}
+
+.remove-cart {
+  font-size: 14px;
+  color: #fff;
+  background-color: #dc3545;
+  border: 1px solid #dc3545;
+  border-radius: 4px;
+  padding: 8px 12px;
+  cursor: pointer;
+  justify-self: flex-end;
+}
+
+.remove-cart:hover,
+.remove-cart:focus {
+  background-color: #c82333;
+  border-color: #c82333;
+}
+
+.close-order-button {
+  font-size: 20px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #00b8d4;
+  border: 1px solid #00b8d4;
+  border-radius: 8px;
+  padding: 20px 23px;
+  cursor: pointer;
+  align-self: center;
+}
+
+.close-order-button:hover,
+.close-order-button:focus {
+  background-color: #00a0c6;
+  border-color: #00a0c6;
+}
+
+.container-close-order {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px;
+}

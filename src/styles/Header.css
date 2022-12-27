@@ -1,0 +1,76 @@
+/* header.css */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #333;
+  color: #fff;
+  padding: 40px;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 18px;
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav li {
+  margin: 0 10px;
+}
+
+nav a {
+  color: #fff;
+  text-decoration: none;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+nav {
+  display: none;
+}
+
+button:focus + nav, button:hover + nav {
+  display: block;
+}
+
+.logo {
+  font-size: 32px;
+  font-weight: bold;
+  color: rgb(141, 141, 141);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 0;
+  text-decoration: none;
+}
+
+.logo:hover {
+  color: #777;
+}
+
+a {
+  text-decoration: none;
+}
+
+.cart-icon {
+  display: inline-block;
+  width: 60px;
+  height: 50px;
+  background-image: url('../icons8-shopping-cart-48.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  text-decoration: none;
+  color: transparent;
+}
+
+/* .cart-icon:hover {
+  background-color: #f1f1f1; */
+/* } */

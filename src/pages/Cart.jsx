@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import Header from '../components/Header';
 import {
   getProductToLocalStorage,
   setProductToLocalStorage,
 } from '../services/localStorage';
 import filterProducts from '../services/services';
+import '../styles/Cart.css'
 
 export default class Cart extends Component {
   constructor() {
@@ -63,52 +65,59 @@ export default class Cart extends Component {
 
     return (
       <div>
+        <Header />
         {
           !filteredProducts.length ? (
-            <span
-              data-testid="shopping-cart-empty-message"
-            >
-              Seu carrinho está vazio.
-            </span>
+            <div className='message-cart'> 
+              <span
+                data-testid="shopping-cart-empty-message"
+              >
+                Seu carrinho está vazio.
+              </span>
+            </div>
           ) : (
             filteredProducts.map((product, index) => (
-              <div key={ index }>
+              <div key={ index } className='cart-card'>
                 <img src={ product.thumbnail } alt={ product.title } />
-                <h3 data-testid="shopping-cart-product-name">{ product.title }</h3>
+                <h3 data-testid="shopping-cart-product-name" className='cart-title'>{ product.title }</h3>
                 <p>{ product.price }</p>
                 <p>{ `Quantidade disponivel: ${product.available_quantity}` }</p>
+                <div className='increase-decrease'>
+                  <button
+                    type="button"
+                    name="decrease"
+                    id={ index }
+                    data-testid="product-decrease-quantity"
+                    onClick={ this.handleQuantity }
+                    disabled={
+                      this.returnQuantEqualCartProducts(product.id)
+                      === minQuantity
+                    }
+                  >
+                    -
+                  </button>
+                  <p
+                    data-testid="shopping-cart-product-quantity"
+                  >
+                    { this.returnQuantEqualCartProducts(product.id) }
+                  </p>
+                  <button
+                    type="button"
+                    name="increase"
+                    id={ product.id }
+                    data-testid="product-increase-quantity"
+                    onClick={ this.handleQuantity }
+                    disabled={
+                      this.returnQuantEqualCartProducts(product.id)
+                      === product.available_quantity
+                    }
+                  >
+                    +
+                  </button>
+                </div>
+
                 <button
-                  type="button"
-                  name="decrease"
-                  id={ index }
-                  data-testid="product-decrease-quantity"
-                  onClick={ this.handleQuantity }
-                  disabled={
-                    this.returnQuantEqualCartProducts(product.id)
-                    === minQuantity
-                  }
-                >
-                  -
-                </button>
-                <p
-                  data-testid="shopping-cart-product-quantity"
-                >
-                  { this.returnQuantEqualCartProducts(product.id) }
-                </p>
-                <button
-                  type="button"
-                  name="increase"
-                  id={ product.id }
-                  data-testid="product-increase-quantity"
-                  onClick={ this.handleQuantity }
-                  disabled={
-                    this.returnQuantEqualCartProducts(product.id)
-                    === product.available_quantity
-                  }
-                >
-                  +
-                </button>
-                <button
+                  className='remove-cart'
                   type="button"
                   name="remove"
                   id={ product.id }
@@ -121,7 +130,10 @@ export default class Cart extends Component {
             ))
           )
         }
-        <Link to="/checkout" data-testid="checkout-products">Fechar pedido</Link>
+        <div className='container-close-order'>
+          <Link to="/checkout" data-testid="checkout-products" className='close-order-button'>Fechar pedido</Link>
+        </div>
+
       </div>
     );
   }

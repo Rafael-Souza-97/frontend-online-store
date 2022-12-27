@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import CartInfo from '../components/CartInfo';
 import Content from '../components/Content';
+import Header from '../components/Header';
 import NavCategories from '../components/NavCategories';
 import {
   getCategories,
@@ -9,6 +10,7 @@ import {
   getProductsFromCategory,
 } from '../services/api';
 import { getProductToLocalStorage } from '../services/localStorage';
+import '../styles/Home.css'
 
 export default class Home extends Component {
   constructor() {
@@ -41,7 +43,6 @@ export default class Home extends Component {
     this.setState({
       searchResult: await getProductsFromQuery(inputSearch),
       message: '',
-
     });
   }
 
@@ -58,39 +59,45 @@ export default class Home extends Component {
   render() {
     const { searchResult, categories, message, counter } = this.state;
     return (
-      <div>
-        { categories.map(({ name, id }) => (
-          <NavCategories
-            key={ id }
-            name={ name }
-            id={ id }
-            saveFilterCategory={ this.saveFilterCategory }
-          />
-        ))}
-        <div>
-          <CartInfo counter={ counter } />
-          <Link to="/cart" data-testid="shopping-cart-button">Carrinho</Link>
+      <div className='container-home'>
+        <Header counter={ counter }/>
+
+        <div className='categories'>
+          { categories.map(({ name, id }) => (
+            <NavCategories
+              key={ id }
+              name={ name }
+              id={ id }
+              saveFilterCategory={ this.saveFilterCategory }
+            />
+          ))}
         </div>
-        <label htmlFor="search">
-          <input
-            type="text"
-            name="inputSearch"
-            id="search"
-            placeholder="Digite um produto"
-            onChange={ this.handleChange }
-            data-testid="query-input"
-          />
-        </label>
-        <button
-          type="button"
-          onClick={ this.handleClick }
-          data-testid="query-button"
-        >
-          Pesquisar
-        </button>
-        { message ? <span data-testid="home-initial-message">{ message }</span> : (
-          <Content searchResult={ searchResult } updateCounter={ this.updateCounter } />
-        )}
+
+        <div className='search-form'>
+          <label htmlFor="search">
+            <input
+              type="text"
+              name="inputSearch"
+              id="search"
+              placeholder="Digite um produto"
+              onChange={ this.handleChange }
+              data-testid="query-input"
+            />
+          </label>
+          <button
+            type="button"
+            onClick={ this.handleClick }
+            data-testid="query-button"
+          >
+            Pesquisar
+          </button>
+        </div>
+
+        <div className='message'>
+          { message ? <span data-testid="home-initial-message">{ message }</span> : (
+            <Content searchResult={ searchResult } updateCounter={ this.updateCounter } />
+          )}
+        </div>
       </div>
     );
   }

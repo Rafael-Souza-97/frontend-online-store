@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import '../styles/Home.css'
 
 export default class ItemCard extends Component {
   render() {
@@ -15,28 +16,32 @@ export default class ItemCard extends Component {
       shipping,
     } = this.props;
     return (
-      <div data-testid="product">
-        { shipping.free_shipping && <p data-testid="free-shipping">Frete Grátis</p> }
-        <img src={ thumbnail } alt={ title } />
-        <h3>{ title }</h3>
-        <p>{`$: ${price}`}</p>
+      <div data-testid="product" className='card'>
         <Link
           to={ `/cart/${id}` }
           data-testid="product-detail-link"
         >
-          Mais Detalhes
+          <div className='card-link' >
+            { shipping.free_shipping && <p data-testid="free-shipping" className='frete'>Frete Grátis</p> }
+            <img src={ thumbnail } alt={ title } className='product-img'/>
+            <h3 className='card-title'>{ title }</h3>
+            <p className='price'>{`R$ ${price}`}</p>
+          </div>
         </Link>
 
-        <button
-          type="button"
-          onClick={ () => {
-            onClick(result);
-            updateCounter();
-          } }
-          data-testid="product-add-to-cart"
-        >
-          Adicionar ao Carrinho
-        </button>
+        <div className='buttom-fix'>
+          <button
+            type="button"
+            className='add-to-cart-button'
+            onClick={ () => {
+              onClick(result);
+              updateCounter();
+            } }
+            data-testid="product-add-to-cart"
+          >
+            Adicionar ao Carrinho
+          </button>
+        </div>
       </div>
     );
   }

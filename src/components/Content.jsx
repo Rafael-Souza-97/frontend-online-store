@@ -5,6 +5,7 @@ import {
   getProductToLocalStorage,
   setProductToLocalStorage,
 } from '../services/localStorage';
+import '../styles/Home.css'
 
 export default class Content extends Component {
   constructor() {
@@ -34,7 +35,7 @@ export default class Content extends Component {
   render() {
     const { searchResult: { results }, updateCounter } = this.props;
     return (
-      <div>
+      <div className='products'>
         { results.length ? (
           results.map((result) => (
             <ItemCard

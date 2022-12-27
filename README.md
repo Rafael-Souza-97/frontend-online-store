@@ -95,3 +95,7 @@ Abra [http://localhost:3000](http://localhost:3000) no seu navegador para visual
 ## Deploy
 
 https://frontend-online-store-peach.vercel.app/
+
+## Preview
+
+https://user-images.githubusercontent.com/99055008/209705726-ddb8b970-0fe9-4691-9564-9ee0f182f310.mp4
